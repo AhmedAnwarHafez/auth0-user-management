@@ -1,6 +1,29 @@
 import request from "superagent";
 
-export async function updateUserRoles(accessToken, userId, roleIdToDelete) {
+export async function getAllRoles(accessToken) {
+  const url = `https://${process.env.AUTH0_DOMAIN}/api/v2/roles`;
+  const roles = await request
+    .get(url)
+    .set("authorization", `Bearer ${accessToken}`)
+    .set("content-type", "application/json");
+
+  return roles.body;
+}
+
+export async function addRoleToUser(accessToken, userId, roleIdToAdd) {
+  const url = `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${userId}/roles`;
+  await request
+    .post(url)
+    .set("authorization", `Bearer ${accessToken}`)
+    .set("content-type", "application/json")
+    .send({
+      roles: [roleIdToAdd],
+    });
+
+  return;
+}
+
+export async function deleteUserRole(accessToken, userId, roleIdToDelete) {
   const url = `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${userId}/roles`;
   await request
     .delete(url)

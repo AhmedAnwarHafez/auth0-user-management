@@ -1,7 +1,7 @@
 function Roles({ userId, roles }) {
   return (
     <>
-      <h2>Roles</h2>
+      <h2>Available</h2>
       <ul>
         {roles.map((role) => (
           <li key={role.id} style={{ display: "flex" }}>
@@ -9,10 +9,10 @@ function Roles({ userId, roles }) {
               {role.name} ({role.description})
             </p>
             <form
-              action={`/users/${userId}/roles/${role.id}/delete`}
+              action={`/users/${userId}/roles/${role.id}/add`}
               method="post"
             >
-              <button type="submit">Delete</button>
+              <button type="submit">Add</button>
             </form>
           </li>
         ))}
