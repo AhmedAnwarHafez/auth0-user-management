@@ -9,7 +9,7 @@ function Layout({ children, title }) {
           crossOrigin="anonymous"
         ></script>
       </head>
-      <body>{children}</body>
+      <body hx-boost="true">{children}</body>
     </html>
   );
 }
